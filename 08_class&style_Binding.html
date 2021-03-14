@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초  익히기 8강</title>
+    <style>
+        .red{
+            color:red;
+        }
+        .font-bold{
+            font-weight: bold;
+        }
+
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div :class="{ red:isRed,'font-bold':isBold }">Hello</div>
+        <!--{red:isRed} 클래스 바인딩 -> isRed가 false면 red클래스가 적용되지 않고 isRed가 true면 red클래스 적용 -->
+        <!-- 'font-bold':isBold ->클래스명에 - 이 들어갈 경우 ' '로 묶어서 String 처리를 해줘야함   -->
+        <button @click="updateClass">Click</button>
+
+        <div :style="{color:red,fontSize:size}">Hello!</div>
+        <!--스타일 바인딩 { } 안에는 자바객체가 들어가고 font-size 는 -대신 size의 s를 대문자로-->
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                isRed:false,
+                isBold:false,
+                red:'red',
+                size:'30px'
+            },
+            methods:{
+                updateClass(){
+                    this.isRed=!this.isRed;
+                    this.isBold=!this.isBold;
+                }
+            },
+        })
+
+    </script>
+</body>
+</html>

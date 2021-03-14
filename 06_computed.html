@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초  익히기 6강</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+        {{number+1}} <br>
+        <!--{{ }} 안에는 자바스크립트 문법사용가능 -->
+        {{message.split('').reverse().join('')}} <br>
+        <!--{{ }} 안에 복잡한 연산이 들어가면 유지보수도 어렵고 알아보기힘들기때문에 computed 속성을 사용함-->
+        <!--computed는 코드 중복사용할때도 도움이 많이됨-->
+        {{reversedMessage}}
+
+        {{reversedMessage_methods()}}
+        <!--
+            methods 랑 computed랑 동일한 기능을 구현할수 있는데 차이점은 
+            computed는 처음 페이지가 로딩될때 vue 인스턴스안에서 data가 로딩되고 
+            그 데이터를 가지고 computed가 로딩되어 값을 이미 가지고있는반면
+            methods 는 상단에서 {{ 메소드명 () }} 호출할때 계산된다.
+
+            예를들어 {{ reversedMessage }} 와 {{ reversedMessage_methods() }}를 세번씩 사용한다고 가정할때
+            computed 속성은 이미 처음페이지가 로딩되었을때 계산된값을 출력하고. 
+            {{ reversedMessage_methods() }} 는 한번한번 호출될때마다 함수가 연산된다.
+            
+            즉, computed는 이미 계산되어져있기때문에 변수처럼 사용가능하고 속도면에서 이점이있다.
+        -->
+        <br>
+        <button @click="changeMessage">Click</button>
+        <!--data 속성의 message 값을 변경하는 이벤트 설정 -->
+        <!--
+            computed가 처음 페이지로딩될때 이미 연산되어 값을 가지고 있기는하지만 
+            computed에 사용되어지는 종속대상의 값 변경되면 그걸 감지하여 함수연산이 실행되어
+            computed값이 업데이트 되어진다.
+        -->
+        
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                number:1,
+                message:'안녕하세요'
+            },
+            methods:{
+                reversedMessage_methods(){
+                    return this.message.split('').reverse().join('');
+                },
+                changeMessage(){
+                    this.message="뷰JS입문"
+                }
+            },
+            computed:{
+                reversedMessage(){
+                    return this.message.split('').reverse().join('');
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초  익히기 1~3강</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{person.name }} {{person.age}}<br>
+        {{nextYear('안녕하세요')}}  <!--함수를 사용할때 안에 넣어주는 값을 '인자'라고함 (argument) -->
+        <input :type="type" v-bind:value="inputData"> <!--vuejs 데이터 바인딩 'v-bind:' -> v-bind 생략해서 ':' 만 써도됨-->
+        <a :href="link">유튜브</a>
+        <a :href="getKossieCoderLink('kossiecoder')">유튜브 채널링크</a>
+        <br>
+        <button>Click me</button>
+    </div>
+
+    <script>
+        new Vue({ //vue 인스턴스를 생성함
+            el:'#app', // app 라는 아이디를 가진 객체에서 vue 코드 사용가능 
+            data:{
+                person:{ //한사람의 데이터라고 생각해서 person 이라고 묶으면
+                         //위에 div에서 사용할때 person. 을 붙여줘야함ㄴ
+                    name:'초보 코더',
+                     age:26
+                },
+                inputData:'hello',
+                type:'number',
+                link:'https://www.youtube.com/'
+            },
+            methods:{
+                getKossieCoderLink(channel){
+                    return this.link+channel;
+                },
+                //nextYear:function(greeting){  //함수안에서 설정하는 값을 '매개변수'라고함 (parameter)
+                nextYear(greeting){ // function을 생략가능
+                    return greeting+ '! '+this.person.name+'는 내년에 '+(this.person.age+1)+ '살 입니다.'
+                //vue.js 에서 vue의 data를 바로 this에 넣어주기때문에 this.person 으로시작한다.
+                },
+                otherMethod:function(){
+                    this.nextYear();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

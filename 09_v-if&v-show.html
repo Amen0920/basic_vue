@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기 9강</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <div v-if="show1">Yes</div> 
+         <br>
+         <button @click="toggle1">Toggle</button>
+        <!-- v-if를 여러태그에  걸때 template 태그를 사용함-->
+
+        <template v-if="show">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </template>
+        <div v-else>No</div>
+        <br>
+        <button @click="toggleShow">Toggle</button> 
+
+        <!--//////////////////////////////////////////////-->
+        <!--number data에 따라 출력. -->
+        <template v-if="number === 1">
+            <div>1</div>
+            <div>2</div>
+            <div>3</div>
+        </template>
+        <div v-else-if="number === 2">Hi</div>
+        <div v-else>No</div>
+        <br>
+        <button @click="increaseNumber">Increase</button>{{number}}
+
+        <!--/////////////////////////////////////////////////-->
+        <br>
+        <div v-show="vshow">Yes</div>
+        <br>
+        <button @click="toggle">ToggleV</button>
+
+        <!--
+            v-if 와 v-show 의 차이
+            
+            v-if의 경우 false이면 페이지렌더링시 아예렌더링되지 않음 ( f12에서 확인시 아예생성되지 않음 )
+            v-show의 경우 false이면 페이지렌더링시 렌더링은 되지만 스타일이 none인 상태임
+            v-if는 toggle시 새로생성해야하기때문에 토글비용이 높고 v-show의 경우 토글비용은 상대적으로 낮지만
+            페이지렌더링시 생성은 해야하기때문에 초기비용이 높다.
+
+            따라서 자주 토글해야하는 객체는 v-show로 생성을하고 그외에는 v-if로 생성한다.
+
+
+
+        -->
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                show1:false,
+                show:false,
+                number:1,
+                vshow:false
+            },
+            methods:{
+                toggle1(){
+                    this.show1=!this.show1;
+                },
+                toggleShow(){
+                    this.show=!this.show;
+                },
+                increaseNumber(){
+                    this.number++;
+                },
+                toggle(){
+                    this.vshow=!this.vshow;
+                }
+                
+            }
+        })
+
+    </script>
+</body>
+</html>

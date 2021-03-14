@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기 10강 </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            {{  people[0].name  }} {{   people[0].age   }}
+        </div>
+        <div>
+            {{  people[1].name  }} {{   people[1].age   }}
+        </div>
+        <div>
+            {{  people[2].name  }} {{   people[2].age   }}
+        </div>
+        <div>
+            {{  people[3].name  }} {{   people[3].age   }}
+        </div>
+
+        <hr>
+
+        <div v-for="(person,index) in people"   :key="person.name">
+            <!--두번째 인자로 index 를 넣으면 index도 출력 -->
+            <!--v-for를 사용할때는 되도록이면 key값도 주는것이 좋고 key값은 중복되지 안흔값을 줘야함-->
+            
+            <!--key 값을 index로 해도 되지않냐고 생각할 수 있는데 index의경우 중간 데이터를 제거하면
+                그 후 데이터들의 index가 변경되기때문에. 고유한값을 가져야하는 key의미에 좀 애매해지기에
+                index는 key값ㅇ느로 사용하지 않는다.
+                -->
+            {{  person.name }} {{   person.age  }} {{   index  }}
+        </div>
+
+        <hr>
+
+        <div v-for="person of people">
+                <!-- of랑 in이랑 동일한 기능 -->
+            {{  person.name }} {{   person.age  }}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                people:[
+                    {name:'a',age:20},
+                    {name:'b',age:23},
+                    {name:'c',age:22},
+                    {name:'d',age:26},
+                    {name:'e',age:27}
+                ]
+            }
+        })
+
+    </script>
+</body>
+</html>

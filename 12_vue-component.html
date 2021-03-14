@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기  12강 Vue 컴포넌트 (전역)</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- {{  name    }}<br>
+        <button @click="changeText">Click</button>
+
+        <hr> -->
+
+        <!--
+             vue 인스턴스가 있는 태그안에서 컴포넌트 사용가능하며 
+            컴포넌트는 태그형식으로 사용한다.
+        -->
+        <kossie-button></kossie-button>
+    </div>
+    
+    <hr>
+    
+    <div id="app-1">
+        <!-- {{  name    }}<br>
+        <button @click="changeText">Click</button>
+
+        <hr> -->
+
+        <kossie-button></kossie-button>
+    </div>
+    <script>
+        
+        // 컴포넌트 안에 컴포넌트를 사용가능함.
+        Vue.component('hello-world',{
+            template:`
+            <div>
+                hello world!
+            </div>
+            `
+        });
+        //컴포넌트를 전역으로 등록
+        Vue.component('kossie-button',{
+            //vue.js 2버전에서는 template 안의 내용들은 하나의 큰태그(root)안에 
+            //들어가있어야 하는 규칙이있음. div안에 안넣으면 에러출력!
+            template:`
+            <div>
+                {{  name    }}<br>
+                <hello-world></hello-world>
+                <button @click="changeText">Click</button>
+            </div>
+            `,
+            // template 에서 줄바꿈을 사용할려면 ` ( ~ 키 ) 를 사용해야함
+
+            // 컴포넌트에서 data 값 업데이트시 동일컴포넌트를 사용하는 곳에서도 
+            //업데이트된 데이터값으로 들어가기때문에. data를 함수형태로 변경해줘야함.
+            data(){
+                return{
+                    name:'kossie'
+                }
+                
+            },
+            methods:{
+                changeText(){
+                    this.name='kossie updated' 
+                    
+                }
+            }
+        });
+        const app1= new Vue({
+            el:'#app',
+            // data:{
+            //     name:'kossie'
+            // },
+            // methods:{
+            //     changeText(){
+            //         this.name='kossie updated' 
+                    
+            //     }
+            // }
+        })
+
+       const app2= new Vue({
+            el:'#app-1',
+            // data:{
+            //     name:'kossie'
+            // },
+            // methods:{
+            //     changeText(){
+            //         this.name='kossie updated'
+            //     }
+            // }
+        })
+
+    </script>
+</body>
+</html>

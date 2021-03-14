@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 공식페이지-  이벤트 핸들러 예제</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="example-1">
+        <button v-on:click="counter+=1">Add 1</button>
+        <p>위 버튼을 클릭한 횟수는 {{counter}} 번 입니다.</p>
+    </div>
+
+    <div id="example-2">
+        <button v-on:click="greet">Greet</button>
+    </div>
+
+    <div id="example-3">
+        
+    </div>
+    <script>
+        new Vue({
+            el:"#example-1",
+            data:{
+                counter:0
+            }
+        })
+       var example2=  new Vue({
+            el:"#example-2",
+            data:{
+                name:'Vue.js 예제'
+            },
+            methods:{
+                greet:function(event){
+                    alert('Hello '+this.name+'!')
+
+                    if(event){
+                        alert(event.target.tagName);
+                    }
+                }
+            }
+
+        })
+        example2.greet();
+    </script>
+</body>
+</html>

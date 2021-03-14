@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 익히기  12강 지역 컴포넌트 </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <!-- {{  name    }}<br>
+        <button @click="changeText">Click</button>
+
+        <hr> -->
+        <kossie-button></kossie-button>
+    </div>
+    <div id="app2">
+
+        <kossie-button></kossie-button>
+    </div>
+    
+    <script>
+        // Vue.component('hello-world',{
+        //     template:`
+        //     <div>
+        //         hello world!
+        //     </div>
+        //     `
+        // });
+        const HelloWord={
+            template:`
+            <div>
+                hello world!
+            </div>
+            `
+        }
+        // Hello world 출력 컴포넌트도 전역이 아니라 지역컴포넌트로 변경시
+        //컴포넌트를 등록시켜주면 사용할수 있다.
+        const KossieButton={
+            components:{
+                'hello-world':HelloWord
+            },
+            template:`
+            <div>
+                {{  name    }}<br>
+                <hello-world></hello-world>
+                <button @click="changeText">Click</button>
+            </div>
+            `,
+            data(){
+                return{
+                    name:'kossie'
+                }
+                
+            },
+            methods:{
+                changeText(){
+                    this.name='kossie updated';
+                    
+                }
+            }
+        };
+        const app1= new Vue({
+            el:'#app1',
+            //지역컴포넌트 등록 '사용할 태그명': 해당컴포넌트
+            components:{
+                'kossie-button': KossieButton
+            }
+            
+        })
+        const app2=new Vue({
+            el:'#app2',
+            components:{
+                'kossie-button':KossieButton
+            }
+        })
+
+    </script>
+</body>
+</html>
